@@ -1,0 +1,40 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Q3.Models
+
+
+<form  asp-controller ="Services" asp-action="Search" method="post">
+	</br> Room Title: <input type="text" value="@ViewBag.pcode" name="pcode" />
+	</br> Month	<input type="text" value="@ViewBag.month" name="month" />
+	</br> <input type="submit" value="Search"/>
+	</form>
+	List of Services
+@model List<Service>
+<table border ="1" method "get">
+<tr>
+	<td>RoomTitle</td>
+	<td>FeeType</td>
+	<td>Month</td>
+	<td>Amount</td>
+	<td> </td>
+</tr>
+	@foreach (Service p in @Model)
+	{
+		if (p.Employee == null){
+			<tr>
+				<td>@p.RoomTitle </td>
+				<td>@p.FeeType</td>
+				<td>@p.Month</td>
+				<td>@p.Amount</td>
+				<td>Unpaid</td>
+			</tr>
+		} else{
+					<tr>
+						<td>@p.RoomTitle </td>
+						<td>@p.FeeType</td>
+						<td>@p.Month</td>
+						<td>@p.Amount</td>
+						<td>Service has been paid. Employee: @p.EmployeeNavigation.Name</td>
+					</tr>
+		}
+	}
+</table>
