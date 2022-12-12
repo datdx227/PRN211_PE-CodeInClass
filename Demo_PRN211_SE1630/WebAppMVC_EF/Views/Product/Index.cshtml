@@ -1,0 +1,52 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using WebAppMVC_EF.Models
+
+List Categories:
+<form id="frm" asp-controller ="Product" asp-action="Index" method="post">
+	<select name ="cateid" onchange="change()">
+		<option value="0">All Categories</option>
+		@foreach (Category c in @ViewBag.Categories)
+		{
+			@if(@c.CategoryId == @ViewBag.selectedid){
+				<option value=@c.CategoryId selected>@c.CategoryName</option>
+			}
+			else{
+				<option value=@c.CategoryId>@c.CategoryName</option>
+			}
+			
+		}
+	</select>
+</form>
+<script>
+	function change(){
+		document.getElementById("frm").submit();
+	}
+</script>
+@model List<Product>
+<form asp-controller="Product" asp-action="Add" method="get">
+	<input type="submit" value="Add new product" />
+</form>
+<br /> List products:
+<table border ="1" method "get">
+	<tr>
+		<td>ProductId</td>
+		<td>ProductName</td>
+		<td>UnitPrice</td>
+		<td>UnitsInStock</td>
+		<td>Image</td>
+		<td>Category</td>
+	</tr>
+	@foreach(Product p in @Model)
+	{
+		<tr>
+				<td><a asp-controller="Product" asp-action="Detail" asp-route-id=@p.ProductId >@p.ProductId</a></td>
+			<td>@p.ProductName</td>
+			<td>@p.UnitPrice</td>
+			<td>@p.UnitsInStock</td>
+			<td>@p.Image</td>
+			<td>@Html.DisplayFor(modelItem => p.Category.CategoryName)</td>
+			<td><a asp-controller="Product" asp-action="Update" asp-route-id=@p.ProductId>Update</a></td>
+			<td><a asp-controller="Product" asp-action="Delete" asp-route-id=@p.ProductId>Delete</a></td>
+		</tr>
+	}
+</table>

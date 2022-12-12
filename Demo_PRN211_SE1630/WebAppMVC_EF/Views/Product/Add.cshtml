@@ -1,0 +1,26 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using WebAppMVC_EF.Models
+@{
+}
+@model Product
+<form asp-controller="Product" asp-action="Add" method="post">
+    Name:<input type="text" asp-for=ProductName/>
+    <span asp-validation-for=ProductName></span>
+    <br />UnitPrice: <input type="text" asp-for=UnitPrice/>
+    <span asp-validation-for=UnitPrice></span>
+    <br />UnitsInStock: <input type="text" asp-for=UnitsInStock/>
+    <span asp-validation-for=UnitsInStock></span>
+    <br />Image: <input type="text" asp-for=Image/>
+    <span asp-validation-for=Image></span>
+    <br />CategoryID: 
+        <select asp-for=CategoryId>
+        @foreach (Category c in @ViewBag.Categories)
+        {
+            <option value=@c.CategoryId>@c.CategoryName</option>
+        }
+    </select>
+    <br /><input type="submit" value="ADD"/>
+</form>

@@ -1,0 +1,19 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using WebAppMVC_EF.Models
+@{
+}
+@model Product
+Product ID : @Model.ProductId
+
+<br />Product Name:@Model.ProductName
+    
+<br />Unit Price: @Model.UnitPrice
+    
+<br />Units In Stock: @Model.UnitsInStock
+    
+<br />Image: @Model.Image
+    
+<br />Category Name: @Html.DisplayFor(modelItem => @Model.Category.CategoryName)

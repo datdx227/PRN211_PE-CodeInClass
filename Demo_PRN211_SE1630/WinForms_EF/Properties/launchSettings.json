@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "WinForms_EF": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57348;http://localhost:57357"
+    }
+  }
+}

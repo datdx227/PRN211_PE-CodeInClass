@@ -1,0 +1,34 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using WebAppMVC.Models
+@model Student
+@{
+}
+Thông tin sinh viên vừa add:
+<br />Code:@Model.Code
+<br />Name:@Model.Name
+<br />Mark:@Model.Mark
+
+<br /> Danh sách sinh viên
+<table border="1">
+    <tr>
+        <td>Code</td>
+        <td>Name</td>
+        <td>Mark</td>
+    </tr>
+    @foreach(Student item in ViewBag.Data)
+    {
+        <tr>
+            <td><a asp-controller="Home" asp-action="Detail" asp-route-id=@item.Code>@item.Code</a></td>
+            <td>@item.Name</td>
+            <td>@item.Mark</td>
+            <td><a asp-controller="Home" asp-action="Update" asp-route-student=@item>Update</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-student=@item>Delete</a></td>
+        </tr>
+    }
+</table>
+    <form asp-controller="Home" asp-action="Add" method="get">
+    <input type="submit" value="Continue"/>
+</form>

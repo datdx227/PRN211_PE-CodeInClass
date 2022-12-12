@@ -1,0 +1,56 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Q2.Models
+
+List Categories:
+<form id="frm" asp-controller="Home" asp-action ="Index" method="post">
+    <select name="cateId" onchange="change()">
+        <option value="0"> All Categories</option>
+        @foreach (Category c in @ViewBag.Categories)
+        {
+            @if (@c.CategoryId == ViewBag.selectedid)
+            {
+                        <option value=@c.CategoryId selected>@c.CategoryName</option>
+            }
+            else
+            {
+                        <option value=@c.CategoryId>@c.CategoryName</option>
+            }
+        }
+    </select>
+</form>
+
+@model List<Product>
+
+
+<a asp-controller="Home" asp-action="Add">Add new Product</a>
+<br /> List Products
+<table border="1">
+    <tr>
+        <td>ProductId</td>
+        <td>ProductName</td>
+        <td>UnitPrice</td>
+        <td>UnitStock</td>
+        <td>Image</td>
+
+        <td>Delete</td>
+        <td>Update</td>
+    </tr>
+    @foreach (Product p in @Model)
+    {
+            <tr>
+                <td><a asp-controller="Home" asp-action="Detail" asp-route-id=@p.ProductId>@p.ProductId</a></td>
+                <td>@p.ProductName</td>
+                <td>@p.UnitPrice</td>
+                <td>@p.UnitsInstock</td>
+                <td>@p.Image</td>
+
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-id=@p.ProductId>Delete</a></td>
+                <td><a asp-controller="Home" asp-action="Update" asp-route-id=@p.ProductId>Update</a></td>
+            </tr>
+    }
+</table>
+<script>
+    function change() {
+        document.getElementById("frm").submit();
+    }
+</script>
