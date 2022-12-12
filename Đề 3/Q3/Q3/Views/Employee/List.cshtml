@@ -1,0 +1,24 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Q3.Models
+
+<H1>List of employees:</H1>
+
+@model List<Employee>
+
+<table border ="0" method "get">
+	<tr>
+		<td width = "300"><b>Name</b> </td>
+		<td><b>Sex</b></td>
+		<td><b>Position</b></td>
+		<td><b>Action</b></td>
+	</tr>
+	@foreach (Employee e in @Model)
+	{
+			<tr>
+				<td>@e.Name</td>
+				<td>@e.Sex</td>
+				<td>@e.Position</td>
+				<td><a asp-controller="Employee" asp-action="Delete" asp-route-id=@e.Id>Delete</a></td>
+			</tr>
+	}
+</table>
