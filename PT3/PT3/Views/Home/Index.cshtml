@@ -1,0 +1,53 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using PT3.Models
+
+
+<form id="frm" asp-controller ="Home" asp-action="Index" method="post">
+		
+		<br/>Product Code: <select name ="pcode" onchange="change()">
+		<option value="0">------All------</option>
+		@foreach (Product p in @ViewBag.Products)
+		{
+			@if (@p.ProductCode.Equals(@ViewBag.pcode))
+			{
+						<option value="@p.ProductCode" selected>@p.ProductCode</option>
+			}
+			else
+			{
+						<option value="@p.ProductCode">@p.ProductCode</option>
+			}
+
+		}
+			</select>
+
+	</br> Product name: <input type="text" value="@ViewBag.pname" name="pname" /> <input type="submit" value="Filter by Name"/>
+	</br> Unit: <input type="text" value="@ViewBag.pcode" name="unit" />
+	</br> Price				Old<input type="text" value="@ViewBag.pcode" name="oldprice" /> -->New <input type="text" value="@ViewBag.pcode" name="newprice" /> <input type="submit" value="Filter by Price"/>
+	</br> Image: <input type="text" value="@ViewBag.image" name="image" /> <input type="submit" value="Filter by Image"/>
+	</br>
+</form>
+<script>
+	function change(){
+		document.getElementById("frm").submit();
+	}
+</script>
+@model List<Product>
+<table border ="1" method "get">
+<tr>
+	<td>MaHang</td>
+	<td>TenHang</td>
+	<td>DVT</td>
+	<td>Gia</td>
+	<td>Image</td>
+</tr>
+	@foreach (Product p in @Model)
+	{
+			<tr>
+				<td>@p.ProductCode </td>
+				<td>@p.ProductName</td>
+				<td>@p.Unit</td>
+				<td>@p.Price</td>
+				<td>@p.Image</td>
+			</tr>
+	}
+</table>
